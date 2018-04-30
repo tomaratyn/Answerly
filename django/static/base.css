@@ -1,0 +1,25 @@
+nav.navbar {
+  margin-bottom: 1em;
+}
+
+.question-preview {
+  margin-bottom: 1em;
+}
+
+.question .meta
+{
+  border-bottom: lightgrey solid .01em;
+  margin-bottom: 2em;
+  padding-bottom: 1em;
+}
+
+.question .body
+{
+  padding-bottom: 1em;
+}
+
+.answer {
+  border-bottom: lightgrey dotted .01em;
+  margin-bottom: 1em;
+  padding-bottom: .5em;
+}

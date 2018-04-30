@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load markdownify %}
+
+{% block body %}
+  {% include 'qanda/common/display_question.html' %}
+  {% if preview %}
+    <div class="card question-preview" >
+      <div class="card-header" >
+        Answer Preview
+      </div >
+      <div class="card-body" >
+        {{ preview|markdownify }}
+      </div >
+    </div >
+  {% endif %}
+  {% include 'qanda/common/post_answer.html' with answer_form=form %}
+{% endblock %}

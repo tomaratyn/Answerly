@@ -15,17 +15,19 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/dev/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*)(q)4xkia=jwc6her!#7xhohtra)p(cmg1bxblb&@$n-n&pvb'
+SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -66,7 +68,6 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -84,11 +85,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'answerly',
-        'USER': 'answerly',
-        'PASSWORD': 'development',
-        'PORT': 5432,
-        'HOST': 'localhost',
     }
 }
 
@@ -130,6 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'gathered_static_files')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -146,8 +143,28 @@ MARKDOWNIFY_WHITELIST_TAGS = [
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-ES_INDEX = 'answerly'
-ES_HOST = 'localhost'
-ES_PORT = '9200'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'main': {
+            'class': 'logging.StreamHandler',
+            'level': 'DEBUG',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['main'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+        },
+        'django.db.backends': {
+            'handlers': [],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'DEBUG'),
+        },
+        'core': {
+            'handlers': ['main'],
+            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO')
+        }
+    },
+}
 
-CHROMEDRIVER = os.path.join(BASE_DIR, '../chromedriver/chromedriver')

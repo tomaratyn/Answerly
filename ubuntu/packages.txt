@@ -1,0 +1,14 @@
+python3
+python3-pip
+virtualenv
+
+apache2
+libapache2-mod-wsgi-py3
+
+postgresql
+postgresql-client
+
+openjdk-8-jre-headless
+
+htop
+tmux

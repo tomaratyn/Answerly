@@ -4,3 +4,6 @@ django-markdownify==0.2.2
 django-crispy-forms==1.7.0
 ipython==6.2.1
 elasticsearch==6.0.0
+coverage==4.4.2
+factory-boy==2.9.2
+selenium==3.8.0

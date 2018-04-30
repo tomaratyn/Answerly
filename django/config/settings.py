@@ -141,7 +141,7 @@ LOGOUT_REDIRECT_URL = 'questions:index'
 MARKDOWINFY_STRIP = False
 MARKDOWNIFY_WHITELIST_TAGS = [
     'a', 'blockquote', 'code', 'em', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
-    'h7', 'li', 'ol', 'p', 'strong', 'ul',
+    'h7', 'li', 'ol', 'p', 'pre', 'strong', 'ul',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -149,3 +149,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 ES_INDEX = 'answerly'
 ES_HOST = 'localhost'
 ES_PORT = '9200'
+
+CHROMEDRIVER = os.path.join(BASE_DIR, '../chromedriver/chromedriver')

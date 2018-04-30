@@ -14,7 +14,7 @@
           </a >
           by
             {{ question.user }}
-          on {{ question.created }}
+          on {{ question.created|date:"Y-m-d H:i" }}
         </li >
       {% empty %}
         <li>Hmm... Everyone thinks they know everything today.</li>

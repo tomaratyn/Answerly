@@ -2,7 +2,7 @@
 <div class="question" >
   <div class="meta col-sm-12" >
     <h1 >{{ question.title }}</h1 >
-    Asked by {{ question.user }} on {{ question.created }}
+    Asked by {{ question.user }} on {{ question.created|date:"Y-m-d H:i" }}
   </div >
   <div class="body col-sm-12" >
     {{ question.question|markdownify }}

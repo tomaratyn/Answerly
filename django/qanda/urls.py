@@ -1,4 +1,4 @@
-from django.urls.conf import path
+from django.urls.conf import path, include
 
 from qanda import views
 
@@ -12,6 +12,8 @@ urlpatterns = [
     path('daily/<int:year>/<int:month>/<int:day>/',
          views.DailyQuestionList.as_view(),
          name='daily_questions'),
+    path('q/search', views.SearchView.as_view(),
+         name='question_search'),
     path('q/<int:pk>', views.QuestionDetailView.as_view(),
          name='question_detail'),
     path('q/<int:pk>/answer', views.CreateAnswerView.as_view(),

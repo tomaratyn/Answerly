@@ -3,3 +3,4 @@ psycopg2==2.7.3.2
 django-markdownify==0.2.2
 django-crispy-forms==1.7.0
 ipython==6.2.1
+elasticsearch==6.0.0

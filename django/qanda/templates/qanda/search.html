@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load markdownify %}
+
+{% block body %}
+  <h2 >Search</h2 >
+  <form method="get" class="form-inline" >
+    <input class="form-control mr-2"
+           placeholder="Search"
+           type="search"
+           name="q" value="{{ query }}" >
+    <button type="submit" class="btn btn-primary" >Search</button >
+  </form >
+  {% if query %}
+    <h3>Results from search query '{{ query }}'</h3 >
+    <ul class="list-unstyled search-results" >
+      {% for hit in hits %}
+        <li >
+          <a href="{% url "qanda:question_detail" pk=hit.id %}" >
+            {{ hit.title }}
+          </a >
+          <div >
+            {{ hit.question_body|markdownify|truncatewords_html:20 }}
+          </div >
+        </li >
+      {% empty %}
+        <li >No results.</li >
+      {% endfor %}
+    </ul >
+  {% endif %}
+{% endblock %}

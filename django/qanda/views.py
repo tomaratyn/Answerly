@@ -8,8 +8,9 @@ from django.views.generic import (
     DetailView,
     RedirectView,
     UpdateView,
-)
+    TemplateView)
 
+from qanda.service.elasticsearch import search_for_questions
 from qanda.forms import QuestionForm, AnswerForm, AnswerAcceptanceForm
 from qanda.models import Question, Answer
 
@@ -97,6 +98,18 @@ class QuestionDetailView(DetailView):
         return ctx
 
 
+class SearchView(TemplateView):
+    template_name = 'qanda/search.html'
+
+    def get_context_data(self, **kwargs):
+        query = self.request.GET.get('q', None)
+        ctx = super().get_context_data(query=query, **kwargs)
+        if query:
+            results = search_for_questions(query)
+            ctx['hits'] = results
+        return ctx
+
+
 class TodaysQuestionList(RedirectView):
     def get_redirect_url(self, *args, **kwargs):
         today = timezone.now()
@@ -120,3 +133,4 @@ class UpdateAnswerAcceptanceView(LoginRequiredMixin, UpdateView):
     def form_invalid(self, form):
         return HttpResponseRedirect(
             redirect_to=self.object.question.get_absolute_url())
+
